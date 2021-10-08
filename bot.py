@@ -1,6 +1,7 @@
 import logging
 from aiogram import Bot, Dispatcher, executor, types
 from config import token
+import utils
 
 
 API_TOKEN = token
@@ -13,17 +14,23 @@ bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
 
-@dp.message_handler(commands=['start', 'help'])
+@dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
     """
-    This handler will be called when user sends `/start` or `/help` command
+    This handler will save user's data in db
+    and send start message
     """
-    await message.reply("Hi!\nI'm EchoBot!\nPowered by aiogram.")
+    utils.save_user(message.get_current())
+    await message.answer('Привет!\nЭтот бот поможет с ошибками\nв работе Консультант Плюс.\n'
+                         '\nПросто введите номер ошибки\n'
+                         'и увидите, что она значит,\n'
+                         'и как исправить.')
 
-
-@dp.message_handler()
-async def echo(message: types.Message):
-    await message.answer(message.text)
+# @dp.message_handler()
+# async def send_description(message: types.Message):
+#     """
+#     This handler will send error description
+#     """
 
 
 if __name__ == '__main__':
