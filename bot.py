@@ -26,11 +26,14 @@ async def send_welcome(message: types.Message):
                          'и увидите, что она значит,\n'
                          'и как исправить.')
 
-# @dp.message_handler()
-# async def send_description(message: types.Message):
-#     """
-#     This handler will send error description
-#     """
+
+@dp.message_handler(content_types='text')
+async def send_description(message: types.Message):
+    """
+    This handler will send error description
+    """
+    description = utils.get_description(message.text)
+    await message.answer(description)
 
 
 if __name__ == '__main__':

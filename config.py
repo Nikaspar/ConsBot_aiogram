@@ -1,3 +1,3 @@
 token = open('token').read().replace('\n', '')
-database = 'description.db'
+database = 'descriptions.db'
 storage = 'storage/storage.db'

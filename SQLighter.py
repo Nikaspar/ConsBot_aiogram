@@ -1,23 +1,23 @@
 import sqlite3
 
 
+def save_data():
+    query = """
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER,
+      is_bot TEXT,
+      first_name TEXT,
+      username TEXT,
+      language_code TEXT
+    );
+    """
+    return query
+
+
 class SQLighter:
     def __init__(self, database):
         self.connection = sqlite3.connect(database)
         self.cursor = self.connection.cursor()
-
-
-    def save_data(self):
-        query = """
-        CREATE TABLE IF NOT EXISTS users (
-          id INTEGER,
-          is_bot TEXT,
-          first_name TEXT,
-          username TEXT,
-          language_code TEXT
-        );
-        """
-
 
     def select_all(self):
         """ Получаем все строки """
