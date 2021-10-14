@@ -36,5 +36,12 @@ async def send_description(message: types.Message):
     await message.answer(description)
 
 
+@dp.message_handler(content_types='photo')
+async def get_photo(message: types.Message):
+    with open(message.text, 'rb') as file:
+        utils.get_photo(file.read())
+    await message.answer('Фото принято')
+
+
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
