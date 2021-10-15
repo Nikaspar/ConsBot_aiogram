@@ -1,6 +1,7 @@
 import logging
 from aiogram import Bot, Dispatcher, executor, types
 from config import token
+from datetime import datetime
 import utils
 
 
@@ -36,11 +37,16 @@ async def send_description(message: types.Message):
     await message.answer(description)
 
 
-@dp.message_handler(content_types='photo')
+@dp.message_handler(content_types=['photo'])
 async def get_photo(message: types.Message):
-    with open(message.text, 'rb') as file:
-        utils.get_photo(file.read())
-    await message.answer('Фото принято')
+    """
+    This handler receives and saves photos to /storage/
+    """
+    user = message.from_user.username
+    date = datetime.now()
+    await message.photo[-1].download(destination_file='/storage/{}{}.jpg'.format(user, date.strftime('%d-%m-%y %H:%M')))
+    await message.answer('Фото сохранено.')
+    await message.delete()
 
 
 if __name__ == '__main__':
