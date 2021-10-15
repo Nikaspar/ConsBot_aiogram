@@ -32,7 +32,7 @@ async def send_description(message: types.Message):
     """
     This handler will send error description
     """
-    description = utils.get_description(message.text)
+    description, status = utils.get_description(message.text)
     await message.answer(description)
 
 
@@ -43,7 +43,7 @@ async def get_photo(message: types.Message):
     """
     user = message.from_user.username
     date = datetime.now()
-    await message.photo[-1].download(destination_file='/storage/{}{}.jpg'.format(user, date.strftime('%d-%m-%y %H:%M')))
+    await message.photo[-1].download(destination_file='storage/{} {}.jpg'.format(user, date.strftime('%d-%m-%y %H_%M')))
     await message.answer('Фото сохранено.')
     await message.delete()
 
