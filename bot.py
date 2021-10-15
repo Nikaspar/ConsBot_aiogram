@@ -21,7 +21,6 @@ async def send_welcome(message: types.Message):
     This handler will save user's data in db
     and send start message
     """
-    utils.save_user(message.get_current())
     await message.answer('Привет!\nЭтот бот поможет с ошибками\nв работе Консультант Плюс.\n'
                          '\nПросто введите номер ошибки\n'
                          'и увидите, что она значит,\n'
