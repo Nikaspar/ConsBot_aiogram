@@ -1,11 +1,9 @@
 import logging
 from aiogram import Bot, Dispatcher, executor, types
-from config import token
 from datetime import datetime
 import utils
 
-
-API_TOKEN = token
+API_TOKEN = 'TOKEN'
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
